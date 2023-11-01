@@ -1,4 +1,6 @@
-package org.example.task12;
+package org.example.task16;
+
+import java.util.*;
 
 public class Book {
     private String title;
@@ -11,15 +13,29 @@ public class Book {
         this.author = author;
         this.price = price;
     }
+    public String getTitle() {
+        return this.title;
+    }
 
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
     public static void main(String[] args) {
-        Book book1 = new Book("The Catcher in the Rye", "J.D. Salinger", 20);
-        Book book2 = new Book("To Kill a Mockingbird", "Harper Lee", 15);
+        Book[] myArray = {  new Book("AAA", "MinGva", 7),
+                new Book("CCC", "KimDan", 2),
+                new Book("QQQ", "Kate", 5)};
 
-        System.out.println(book1.equals(book2)); // Сравнение объектов
-        System.out.println(book1.hashCode()); // Получение хэш-кода
-        System.out.println(book2.hashCode());
-        System.out.println(book1); // Преобразование в строку
+        Comparator<Book> titleComparator = new TitleComparator();
+        Comparator<Book> titleAuthorComparator = new TitleComparator().thenComparing(new AuthorComparator());
+        Comparator<Book> authorTitleComparator = new AuthorComparator().thenComparing(new TitleComparator());
+        Comparator<Book> authorTitlePriceComparator = new AuthorComparator().thenComparing(new TitleComparator().thenComparing(new PriceComparator()));
+
+        Arrays.sort(myArray, titleComparator);
+        System.out.println(Arrays.toString(myArray));
     }
 
     // Переопределение метода equals() для сравнения объектов Book

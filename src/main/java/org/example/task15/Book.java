@@ -1,25 +1,37 @@
-package org.example.task12;
+package org.example.task15;
 
-public class Book {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Book implements Comparable<Book> {
     private String title;
     private String author;
     private int price;
-    private static int edition;
+    private String isbn;
 
-    public Book(String title, String author, int price) {
+    public Book(String title, String author, int price, String isbn) {
         this.title = title;
         this.author = author;
         this.price = price;
+        this.isbn = isbn;
     }
 
     public static void main(String[] args) {
-        Book book1 = new Book("The Catcher in the Rye", "J.D. Salinger", 20);
-        Book book2 = new Book("To Kill a Mockingbird", "Harper Lee", 15);
+        Book book1 = new Book("AAAAAAAAA", "han", 20, "12");
+        Book book2 = new Book("vvvvvvvvv", "hyon", 15, "10");
+        Book book3 = new Book("ccccccccc", "tomas", 18, "77");
 
-        System.out.println(book1.equals(book2)); // Сравнение объектов
-        System.out.println(book1.hashCode()); // Получение хэш-кода
-        System.out.println(book2.hashCode());
-        System.out.println(book1); // Преобразование в строку
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+
+        Collections.sort(books);
+
+        for (Book book : books) {
+            System.out.println(book);
+        }
     }
 
     // Переопределение метода equals() для сравнения объектов Book
@@ -55,4 +67,9 @@ public class Book {
                 ", price=" + price +
                 '}';
     }
+    @Override
+    public int compareTo(Book other) {
+        return this.isbn.compareTo(other.isbn);
+    }
 }
+
