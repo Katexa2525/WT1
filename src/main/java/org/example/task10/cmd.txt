@@ -1,0 +1,3 @@
+cd src/main/java
+javac org/example/task9/Ball.java org/example/task9/Basket.java org/example/task9/Main.java
+java org/example/task9/Main
